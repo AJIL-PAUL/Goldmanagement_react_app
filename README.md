@@ -1,6 +1,7 @@
 # Goldmanagement_react_app
-cd Goldmanagement_react_app
+
 # For running backend
+cd Goldmanagement_react_app <br>
 npm install <br>
 nodemon server
 
