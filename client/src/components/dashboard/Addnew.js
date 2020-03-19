@@ -19,7 +19,7 @@ export class Addnew extends Component {
         }
         axios.post(`/api/gold`, newdata)
             .then(res => {
-                ToastsStore.success("Added Successfully");
+                ToastsStore.success("Details added Successfully");
                 console.log(res);
                 console.log(res.data);
             })
