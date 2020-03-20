@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -13,7 +12,6 @@ import Register from "../auth/Register";
 import { Addnew } from "./Addnew";
 import { Viewdetails } from "./Viewdetails";
 import PrivateRoute from "../private-route/PrivateRoute";
-// import '../../style/navbar.css'
 
 class Dashboard extends Component {
   onLogoutClick = e => {
@@ -29,6 +27,7 @@ class Dashboard extends Component {
     return (
       <Provider store={store}>
         <Router>
+
           <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
               <Navbar.Brand as={NavLink} to="/dashboard">Home</Navbar.Brand>
@@ -47,7 +46,7 @@ class Dashboard extends Component {
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
-
+            {/* Routing */}
             <Switch>
               <PrivateRoute exact={true} path="/dashboard/addnew" component={Addnew} />
               <PrivateRoute exact path="/dashboard/details" component={Viewdetails} />

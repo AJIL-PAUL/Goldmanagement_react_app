@@ -1,3 +1,5 @@
+// For Uthenticated Routing
+
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -10,8 +12,8 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
       auth.isAuthenticated === true ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/login" />
-      )
+          <Redirect to="/login" />
+        )
     }
   />
 );

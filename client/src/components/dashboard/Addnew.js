@@ -10,6 +10,7 @@ export class Addnew extends Component {
         ownerName: "",
         weight: ""
     }
+    // posting form data
     onSubmit = e => {
         e.preventDefault();
         const newdata = {
@@ -81,6 +82,7 @@ export class Addnew extends Component {
                             ADD
                         </Button>
                     </Form>
+                    {/* To display Toaster */}
                     <ToastsContainer position={ToastsContainerPosition.BOTTOM_CENTER} store={ToastsStore} />
                 </div>
             </div>
