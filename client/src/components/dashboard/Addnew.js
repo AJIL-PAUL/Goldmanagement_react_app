@@ -8,11 +8,20 @@ export class Addnew extends Component {
     state = {
         goldid: "",
         ownerName: "",
-        weight: ""
+        weight: "",
+        validated: false,
+        setValidated: false
     }
     // posting form data
     onSubmit = e => {
-        e.preventDefault();
+        // const form = e.currentTarget;
+        // if (form.checkValidity() === false) {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        // }
+        // this.setState({
+        //     setValidated: true
+        // });
         const newdata = {
             goldid: this.state.goldid,
             ownerName: this.state.ownerName,
@@ -33,11 +42,12 @@ export class Addnew extends Component {
         this.setState({ [e.target.id]: e.target.value });
     };
     render() {
+
         return (
             <div className="row justify-content-center">
                 <div className="col-sm-6 align-items-center ">
                     <br></br><br></br><br></br>
-                    <Form noValidate onSubmit={this.onSubmit}>
+                    <Form validated={this.state.validated} onSubmit={this.onSubmit}>
                         <Form.Group>
                             <Form.Label>GoldID</Form.Label>
                             <Form.Control
@@ -45,23 +55,32 @@ export class Addnew extends Component {
                                 onChange={this.onChange}
                                 value={this.state.goldid}
                                 id="goldid"
-                                type="text" />
+                                type="text"
+                                required />
                             {/* <Form.Text className="text-muted">
 
                             </Form.Text> */}
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid Id.
+                            </Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group>
                             <Form.Label>Name</Form.Label>
                             <Form.Control
+                                required
                                 placeholder="Name"
                                 onChange={this.onChange}
                                 value={this.state.ownerName}
                                 id="ownerName"
-                                type="text" />
+                                type="text"
+                            />
                             <Form.Text className="text-muted">
 
                             </Form.Text>
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid Name.
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Weight</Form.Label>
@@ -70,10 +89,14 @@ export class Addnew extends Component {
                                 onChange={this.onChange}
                                 value={this.state.weight}
                                 id="weight"
-                                type="text" />
+                                type="text"
+                                required />
                             <Form.Text className="text-muted">
 
                             </Form.Text>
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid Weigth.
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group>
                             <Form.Check type="checkbox" label="Check me out" />

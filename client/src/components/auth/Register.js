@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 import { Form, Button } from "react-bootstrap";
+
 class Register extends Component {
   constructor() {
     super();
@@ -54,9 +55,10 @@ class Register extends Component {
 
     return (
       <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-sm-6">
-            <br></br><br></br>
+        <div style={{ marginTop: "4rem" }} className="row justify-content-center">
+          <div className="col-sm-6 s8 offset-s2">
+
+            <h2>Add New User</h2><br></br>
             <Form noValidate onSubmit={this.onSubmit}>
               <Form.Group >
                 <Form.Label>Name</Form.Label>

@@ -41,10 +41,9 @@ class App extends Component {
               <Route exact path="/">
                 {<Redirect to="/dashboard" />}
               </Route>
-            </Switch>
-            <Route exact path="/login" component={Login} />
-            <Switch>
+              <Route exact path="/login" component={Login} />
               <PrivateRoute path="/dashboard" component={Dashboard} />
+              <PrivateRoute path="**" component={Login} />
             </Switch>
           </div>
         </Router>
