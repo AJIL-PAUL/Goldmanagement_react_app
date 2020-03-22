@@ -51,23 +51,24 @@ router.post('/', (req, res) => {
 });
 
 // to retrieve gold
-router.post('/cust/retrieve', (req, res) => {
+router.post('/retrieve', (req, res) => {
     // if (!ObjectId.isValid(req.param.id)) {
     //     return res.status(400).send(`No records with given id : ${req.params.id}`);
     // }
     globals = {}
-    Customer.findOneAndUpdate({ customer_id: req.body.customer_id, status: "Not retrieved" },
+    Customer.findOneAndUpdate({ customer_id: req.body.customer_id, status: 'Not retrieved' },
         { $set: { status: "Retrieved" } },
+        { multi: true },
         (err, doc) => {
             if (doc && !err) {
-                globals.coordinate = new Coordinate({
-                    x_cord: doc.racket_id[0].x_cord,
-                    y_cord: doc.racket_id[0].y_cord
-                });
-                globals.weight = doc.weight;
-
+                console.log("ok")
+                globals.x_cord = doc.racket_id[0].x_cord,
+                    globals.y_cord = doc.racket_id[0].y_cord,
+                    globals.weight = doc.weight;
+                console.log(globals.x_cord);
                 Box.findOneAndUpdate({
-                    racket_id: globals.coordinate
+                    "racket_id.x_cord": globals.x_cord,
+                    "racket_id.y_cord": globals.y_cord
                 },
                     { $inc: { rem_weight: globals.weight, no_of_items: -1 } },
                     { new: true },
@@ -83,7 +84,15 @@ router.post('/cust/retrieve', (req, res) => {
 
                     });
             }
-        })
+            else {
+                if (err) {
+                    res.status(400).send(err);
+                }
+                else {
+                    res.send(null);
+                }
+            }
+        });
 })
 
 // to get box details
@@ -100,7 +109,7 @@ router.get('/box/:id', (req, res) => {
 
 // get single customer details
 router.post('/customer', (req, res) => {
-    Customer.findOne({ customer_id: req.body.customer_id }, (err, doc) => {
+    Customer.findOne({ customer_id: req.body.customer_id, status: 'Not retrieved' }, (err, doc) => {
         if (!err) { res.send(doc); }
         else {
             console.log('Error in Retriving Employee :' + JSON.stringify(err, undefined, 2));

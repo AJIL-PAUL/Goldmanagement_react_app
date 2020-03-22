@@ -36,7 +36,7 @@ class Dashboard extends Component {
                 <Nav className="mr-auto">
                   <Nav.Link as={NavLink} to="/dashboard/addnew">Add</Nav.Link>
                   <Nav.Link as={NavLink} to="/dashboard/details">Details</Nav.Link>
-                  <Nav.Link as={NavLink} to="/dashboard/retrieve">Retrive</Nav.Link>
+                  <Nav.Link as={NavLink} to="/dashboard/retrieve">Retrieve</Nav.Link>
                 </Nav>
                 <Nav className="ml-auto">
                   <NavDropdown title={user.name.split(" ")[0]} id="collasible-nav-dropdown">

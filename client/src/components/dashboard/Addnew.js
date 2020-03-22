@@ -32,15 +32,26 @@ export class Addnew extends Component {
                 ToastsStore.success("Details added Successfully");
                 console.log(res);
                 console.log(res.data);
+                this.reset();
             })
             .catch((err) => {
                 console.log("Error: ", err);
                 ToastsStore.error("Error Occured!");
             });
+
     }
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
+    reset = e => {
+        this.setState({
+            customer_id: "",
+            ownerName: "",
+            weight: "",
+            validated: false,
+            setValidated: false
+        });
+    }
     render() {
 
         return (

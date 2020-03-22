@@ -25,20 +25,28 @@ export class Retrieve extends Component {
             });
 
     }
-    retrieve = () => {
-        const newdata = {
-            customer_id: this.state.customer_id
+    retrieve = (e) => {
+
+        if (window.confirm("Are you sure to retrieve the gold?")) {
+            const newdata = {
+                customer_id: this.state.customer_id
+            }
+            axios.post(`/api/gold/retrieve`, newdata)
+                .then(res => {
+                    if (res.data) {
+                        ToastsStore.success("Customer retrieved gold successfully");
+                        console.log(res.data);
+                    }
+                    else {
+                        ToastsStore.error("Customer Already retrieved gold");
+                    }
+                })
+                .catch((err) => {
+                    console.log("Error: ", err);
+                    ToastsStore.error("Error Occured!");
+                });
         }
-        axios.post(`/api/gold/retrieve`, newdata)
-            .then(res => {
-                ToastsStore.success("Customer retrieved gold successfully");
-                console.log(res);
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log("Error: ", err);
-                ToastsStore.error("Error Occured!");
-            });
+
 
     }
     render() {
@@ -101,6 +109,7 @@ export class Retrieve extends Component {
                         <Button variant="primary" onClick={this.retrieve} >
                             Retrieve
                         </Button>
+                        <ToastsContainer position={ToastsContainerPosition.BOTTOM_CENTER} store={ToastsStore} />
                     </Form>
                     }
                 </div>
