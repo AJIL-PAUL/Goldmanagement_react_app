@@ -8,7 +8,7 @@ import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Provider } from "react-redux";
 import store from "../../store";
 import Register from "../auth/Register";
-
+import { Retrieve } from "./Retrieve";
 import { Addnew } from "./Addnew";
 import { Viewdetails } from "./Viewdetails";
 import PrivateRoute from "../private-route/PrivateRoute";
@@ -36,6 +36,7 @@ class Dashboard extends Component {
                 <Nav className="mr-auto">
                   <Nav.Link as={NavLink} to="/dashboard/addnew">Add</Nav.Link>
                   <Nav.Link as={NavLink} to="/dashboard/details">Details</Nav.Link>
+                  <Nav.Link as={NavLink} to="/dashboard/retrieve">Retrive</Nav.Link>
                 </Nav>
                 <Nav className="ml-auto">
                   <NavDropdown title={user.name.split(" ")[0]} id="collasible-nav-dropdown">
@@ -51,6 +52,7 @@ class Dashboard extends Component {
               <PrivateRoute exact={true} path="/dashboard/addnew" component={Addnew} />
               <PrivateRoute exact path="/dashboard/details" component={Viewdetails} />
               <PrivateRoute exact path="/dashboard/adduser" component={Register} />
+              <PrivateRoute exact path="/dashboard/retrieve" component={Retrieve} />
             </Switch>
           </div>
         </Router>

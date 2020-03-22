@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+import { Form, Button } from "react-bootstrap";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,26 +13,50 @@ import Paper from '@material-ui/core/Paper';
 export class Viewdetails extends Component {
     // Inintiating details array
     state = {
-        alldetails: []
+        alldetails: [],
+        status: "not_retrieved"
     }
     componentDidMount() {
-        axios.get(`/api/gold`)
+        this.refresh()
+    }
+    refresh = () => {
+        axios.get(`/api/gold/customer/${this.state.status}`)
             .then(res => {
                 const alldetails = res.data;
-                this.setState({ alldetails });
+                this.setState({ alldetails: alldetails });
+                console.log(alldetails);
             })
     }
+    onSubmit = e => {
+        e.preventDefault();
+        this.refresh();
+    }
+    onChange = e => {
+        this.setState({ status: e.target.value });
+    };
     render() {
 
         return (
-            <div className="row justify-content-center">
+            <div style={{ marginTop: "2rem" }} className="row justify-content-center ">
+                <Form onSubmit={this.onSubmit}>
+                    <Form.Group >
+                        <Form.Label>Select Status</Form.Label>
+                        <Form.Control as="select" onChange={this.onChange}>
+                            <option value="not_retrieved">Not Retrieved</option>
+                            <option value="retrieved">Retrieved</option>
+                        </Form.Control>
+
+                    </Form.Group>
+                    <Button type="submit">Submit</Button>
+                </Form>
+
                 <div className="col-md-9 ">
                     <br></br>
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>GoldID</TableCell>
+                                    <TableCell>CustomerId</TableCell>
                                     <TableCell >OwnerName</TableCell>
                                     <TableCell >Weight</TableCell>
                                     <TableCell >RacketId</TableCell>
@@ -41,11 +66,11 @@ export class Viewdetails extends Component {
                                 {this.state.alldetails.map(row => (
                                     <TableRow key={row._id}>
                                         <TableCell component="th" scope="row">
-                                            {row.goldid}
+                                            {row.customer_id}
                                         </TableCell>
                                         <TableCell >{row.ownerName}</TableCell>
-                                        <TableCell >{row.weight}</TableCell>
-                                        <TableCell >{row.racketid}</TableCell>
+                                        <TableCell >{row.weight}g</TableCell>
+                                        <TableCell >{row.racket_id[0].x_cord} {row.racket_id[0].y_cord}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

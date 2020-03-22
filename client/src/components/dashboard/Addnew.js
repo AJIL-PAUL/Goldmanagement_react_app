@@ -6,7 +6,7 @@ import '../../style/navbar.css'
 
 export class Addnew extends Component {
     state = {
-        goldid: "",
+        customer_id: "",
         ownerName: "",
         weight: "",
         validated: false,
@@ -16,14 +16,14 @@ export class Addnew extends Component {
     onSubmit = e => {
         // const form = e.currentTarget;
         // if (form.checkValidity() === false) {
-        //     e.preventDefault();
+        e.preventDefault();
         //     e.stopPropagation();
         // }
         // this.setState({
         //     setValidated: true
         // });
         const newdata = {
-            goldid: this.state.goldid,
+            customer_id: this.state.customer_id,
             ownerName: this.state.ownerName,
             weight: this.state.weight
         }
@@ -44,17 +44,17 @@ export class Addnew extends Component {
     render() {
 
         return (
-            <div className="row justify-content-center">
+            <div style={{ marginTop: "2rem" }} className="row justify-content-center">
                 <div className="col-sm-6 align-items-center ">
                     <br></br><br></br><br></br>
                     <Form validated={this.state.validated} onSubmit={this.onSubmit}>
                         <Form.Group>
-                            <Form.Label>GoldID</Form.Label>
+                            <Form.Label>CustomerID</Form.Label>
                             <Form.Control
-                                placeholder="GoldID"
+                                placeholder="Enter the customer id"
                                 onChange={this.onChange}
-                                value={this.state.goldid}
-                                id="goldid"
+                                value={this.state.customer_id}
+                                id="customer_id"
                                 type="text"
                                 required />
                             {/* <Form.Text className="text-muted">
