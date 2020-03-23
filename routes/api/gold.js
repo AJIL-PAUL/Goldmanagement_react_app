@@ -97,13 +97,11 @@ router.post('/retrieve', (req, res) => {
 
 // to get box details
 
-router.get('/box/:id', (req, res) => {
-    if (!ObjectId.isValid(req.params.id))
-        return res.status(400).send(`No record with given id : ${req.params.id}`);
+router.get('/boxdetails', (req, res) => {
 
-    Box.findById(req.params.id, (err, doc) => {
+    Box.find({ no_of_items: { $gt: 0 } }, (err, doc) => {
         if (!err) { res.send(doc); }
-        else { console.log('Error in Retriving Employee :' + JSON.stringify(err, undefined, 2)); }
+        else { console.log('Error in Retriving Box details :' + JSON.stringify(err, undefined, 2)); }
     });
 });
 

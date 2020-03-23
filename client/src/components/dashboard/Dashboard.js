@@ -11,6 +11,7 @@ import Register from "../auth/Register";
 import { Retrieve } from "./Retrieve";
 import { Addnew } from "./Addnew";
 import { Viewdetails } from "./Viewdetails";
+import { Boxdetails } from "./Boxdetails";
 import PrivateRoute from "../private-route/PrivateRoute";
 
 class Dashboard extends Component {
@@ -37,6 +38,7 @@ class Dashboard extends Component {
                   <Nav.Link as={NavLink} to="/dashboard/addnew">Add</Nav.Link>
                   <Nav.Link as={NavLink} to="/dashboard/details">Details</Nav.Link>
                   <Nav.Link as={NavLink} to="/dashboard/retrieve">Retrieve</Nav.Link>
+                  <Nav.Link as={NavLink} to="/dashboard/boxdetails">Box Details</Nav.Link>
                 </Nav>
                 <Nav className="ml-auto">
                   <NavDropdown title={user.name.split(" ")[0]} id="collasible-nav-dropdown">
@@ -49,10 +51,12 @@ class Dashboard extends Component {
             </Navbar>
             {/* Routing */}
             <Switch>
+              <PrivateRoute exact={true} path="/dashboard" component={Addnew} />
               <PrivateRoute exact={true} path="/dashboard/addnew" component={Addnew} />
               <PrivateRoute exact path="/dashboard/details" component={Viewdetails} />
               <PrivateRoute exact path="/dashboard/adduser" component={Register} />
               <PrivateRoute exact path="/dashboard/retrieve" component={Retrieve} />
+              <PrivateRoute exact path="/dashboard/boxdetails" component={Boxdetails} />
             </Switch>
           </div>
         </Router>

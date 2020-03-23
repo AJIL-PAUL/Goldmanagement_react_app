@@ -9,76 +9,56 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
-export class Viewdetails extends Component {
-    // Inintiating details array
+export class Boxdetails extends Component {
     state = {
-        alldetails: [],
-        status: "not_retrieved"
+        alldetails: []
     }
     componentDidMount() {
         this.refresh()
     }
     refresh = () => {
-        axios.get(`/api/gold/customer/${this.state.status}`)
+        axios.get(`/api/gold/boxdetails`)
             .then(res => {
                 const alldetails = res.data;
                 this.setState({ alldetails: alldetails });
                 console.log(alldetails);
             })
     }
-    onSubmit = e => {
-        e.preventDefault();
-        this.refresh();
-    }
-    onChange = e => {
-        this.setState({ status: e.target.value });
-    };
-    render() {
 
+    render() {
         return (
             <div style={{ marginTop: "2rem" }} className="row justify-content-center ">
-                <Form onSubmit={this.onSubmit}>
-                    <Form.Group >
-                        <Form.Label>Select Status</Form.Label>
-                        <Form.Control as="select" onChange={this.onChange}>
-                            <option value="not_retrieved">Not Retrieved</option>
-                            <option value="retrieved">Retrieved</option>
-                        </Form.Control>
-
-                    </Form.Group>
-                    <Button type="submit">Submit</Button>
-                </Form>
-
                 <div className="col-md-9 ">
                     <br></br>
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>CustomerId</TableCell>
-                                    <TableCell >OwnerName</TableCell>
-                                    <TableCell >Weight</TableCell>
-                                    <TableCell >RacketId</TableCell>
+                                    <TableCell>Box ID</TableCell>
+                                    <TableCell >Total Weight (gram)</TableCell>
+                                    <TableCell >Remaining Wiegth (gram)</TableCell>
+                                    <TableCell >No. of Items</TableCell>
                                 </TableRow>
                             </TableHead>
-                            <TableBody>
+                            <TableBody >
                                 {this.state.alldetails.map((row, index) => (
                                     <TableRow style={index % 2 ? { background: "#f7f7f7" } : { background: "white" }} key={row._id}>
                                         <TableCell component="th" scope="row">
-                                            {row.customer_id}
+                                            {row.racket_id[0].x_cord} {row.racket_id[0].y_cord}
                                         </TableCell>
-                                        <TableCell >{row.ownerName}</TableCell>
-                                        <TableCell >{row.weight}g</TableCell>
-                                        <TableCell >{row.racket_id[0].x_cord} {row.racket_id[0].y_cord}</TableCell>
+                                        <TableCell >{row.total_weight}g</TableCell>
+                                        <TableCell >{row.rem_weight}g</TableCell>
+                                        <TableCell >{row.no_of_items}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <p>Other boxes are empty</p>
                 </div>
             </div>
         )
     }
 }
-export default Viewdetails;
+
+export default Boxdetails

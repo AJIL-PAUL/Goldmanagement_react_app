@@ -55,10 +55,10 @@ export class Addnew extends Component {
     render() {
 
         return (
-            <div style={{ marginTop: "2rem" }} className="row justify-content-center">
+            <div style={{ marginTop: "3rem" }} className="row justify-content-center">
                 <div className="col-sm-6 align-items-center ">
-                    <br></br><br></br><br></br>
-                    <Form validated={this.state.validated} onSubmit={this.onSubmit}>
+                    <h1>Add New Customer</h1>
+                    <Form style={{ marginTop: "2rem" }} validated={this.state.validated} onSubmit={this.onSubmit}>
                         <Form.Group>
                             <Form.Label>CustomerID</Form.Label>
                             <Form.Control
