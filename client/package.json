@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.7",
+    "antd": "^4.0.4",
     "axios": "^0.18.0",
     "bootstrap": "^4.4.1",
     "classnames": "^2.2.6",

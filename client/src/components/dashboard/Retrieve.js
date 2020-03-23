@@ -19,6 +19,9 @@ export class Retrieve extends Component {
         }
         axios.post(`/api/gold/customer`, newdata)
             .then(res => {
+                if (!res.data) {
+                    ToastsStore.error("No such Customer!! Invalid ID");
+                }
                 const customerdetails = res.data;
                 this.setState({ customerdetails: customerdetails });
                 console.log(customerdetails);
@@ -73,7 +76,7 @@ export class Retrieve extends Component {
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
-
+                        <ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore} />
                     </Form>
                     {this.state.customerdetails.customer_id && <Form>
                         <Form.Group as={Row}>
@@ -96,7 +99,7 @@ export class Retrieve extends Component {
                                 />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row}>
+                        {this.state.customerdetails.status === "Not retrieved" && <Form.Group as={Row}>
                             <Form.Label column sm={2}>Box ID</Form.Label>
                             <Col sm={10}>
                                 <Form.Control
@@ -105,8 +108,19 @@ export class Retrieve extends Component {
                                     disabled
                                 />
                             </Col>
+                        </Form.Group>}
+                        <Form.Group as={Row}>
+                            <Form.Label column sm={2}>Box ID</Form.Label>
+                            <Col sm={10}>
+                                {this.state.customerdetails.status === "Not retrieved" && <div className="alert alert-success alert-dismissible fade show">
+                                    <strong>Not yet Retrieved!</strong> You can retrieve.
+                                </div>}
+                                {this.state.customerdetails.status === "Retrieved" && <div className="alert alert-danger alert-dismissible fade show">
+                                    <strong>Already Retrieved!</strong> Sorry, the customer already retrieved the gold.
+                                </div>}
+                            </Col>
                         </Form.Group>
-                        <Button variant="primary" onClick={this.retrieve} >
+                        <Button disabled={this.state.customerdetails.status === "Retrieved"} variant="primary" onClick={this.retrieve} >
                             Retrieve
                         </Button>
                         <ToastsContainer position={ToastsContainerPosition.BOTTOM_CENTER} store={ToastsStore} />

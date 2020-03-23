@@ -107,7 +107,7 @@ router.get('/boxdetails', (req, res) => {
 
 // get single customer details
 router.post('/customer', (req, res) => {
-    Customer.findOne({ customer_id: req.body.customer_id, status: 'Not retrieved' }, (err, doc) => {
+    Customer.findOne({ customer_id: req.body.customer_id }, (err, doc) => {
         if (!err) { res.send(doc); }
         else {
             console.log('Error in Retriving Employee :' + JSON.stringify(err, undefined, 2));

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
@@ -52,11 +52,11 @@ class Register extends Component {
 
   render() {
     const { errors } = this.state;
-
+    const { user } = this.props.auth;
     return (
       <div className="container">
         <div style={{ marginTop: "4rem" }} className="row justify-content-center">
-          <div className="col-sm-6 s8 offset-s2">
+          {user.name.split(" ")[0] === "abc" ? <div className="col-sm-6 s8 offset-s2">
 
             <h2>Add New User</h2><br></br>
             <Form noValidate onSubmit={this.onSubmit}>
@@ -122,9 +122,17 @@ class Register extends Component {
               </Form.Group>
               <Button variant="primary" type="submit">
                 Add User
-  </Button>
+             </Button>
             </Form>
-          </div>
+          </div> : <div className="alert alert-warning alert-dismissible fade show">
+              <h4 className="alert-heading"><i className="fa fa-warning"></i> Sorry! You are not the Admin</h4>
+              <p>Only admin can add users. Since you are not the admin, you cannot add users.
+              Please login as the Admin.
+              </p>
+              <hr></hr>
+              <p className="mb-0"></p>
+              {/* <button type="button" className="close" data-dismiss="alert">&times;</button> */}
+            </div>}
         </div>
       </div>
     );

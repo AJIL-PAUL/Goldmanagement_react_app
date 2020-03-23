@@ -1,0 +1,19 @@
+#components-layout-demo-responsive .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
+  
+  .site-layout-sub-header-background {
+    background: #fff;
+  }
+  
+  .site-layout-background,.ant-layout-sider, .ant-layout-sider-children  {
+    background: #fff;
+  }
+.logo{
+    background-color: rgb(228, 228, 228);
+}
+.ant-menu-submenu-title{
+  background-color: none !important;
+}
