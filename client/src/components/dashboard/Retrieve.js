@@ -29,7 +29,7 @@ export class Retrieve extends Component {
 
     }
     retrieve = (e) => {
-
+        let customerdetailscopy = JSON.parse(JSON.stringify(this.state.customerdetails));
         if (window.confirm("Are you sure to retrieve the gold?")) {
             const newdata = {
                 customer_id: this.state.customer_id
@@ -39,6 +39,12 @@ export class Retrieve extends Component {
                     if (res.data) {
                         ToastsStore.success("Customer retrieved gold successfully");
                         console.log(res.data);
+
+                        //to change state of status to retreived
+                        customerdetailscopy.status = "Retrieved"
+                        this.setState({
+                            customerdetails: customerdetailscopy
+                        });
                     }
                     else {
                         ToastsStore.error("Customer Already retrieved gold");
@@ -55,6 +61,7 @@ export class Retrieve extends Component {
     render() {
         return (
             <div style={{ marginTop: "2rem" }} className="row justify-content-center">
+                <ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore} />
                 <div className="col-sm-6 align-items-center ">
                     <Form onSubmit={this.selectCustomer}>
                         <Form.Group>
@@ -76,7 +83,6 @@ export class Retrieve extends Component {
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
-                        <ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore} />
                     </Form>
                     {this.state.customerdetails.customer_id && <Form>
                         <Form.Group as={Row}>
@@ -123,7 +129,6 @@ export class Retrieve extends Component {
                         <Button disabled={this.state.customerdetails.status === "Retrieved"} variant="primary" onClick={this.retrieve} >
                             Retrieve
                         </Button>
-                        <ToastsContainer position={ToastsContainerPosition.BOTTOM_CENTER} store={ToastsStore} />
                     </Form>
                     }
                 </div>

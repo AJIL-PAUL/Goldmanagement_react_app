@@ -62,7 +62,7 @@ class Dashboard extends Component {
                   </div>
                 </Dropdown>
               </div>
-              <Menu theme='light' mode="inline" defaultSelectedKeys={['1']}>
+              <Menu theme='light' mode="inline">
                 <Menu.Item key="1">
                   <UserOutlined />
                   <Link to="/dashboard/addnew" className="nav-text">Add Customer</Link>

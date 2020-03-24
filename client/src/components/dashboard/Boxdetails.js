@@ -26,7 +26,8 @@ export class Boxdetails extends Component {
     render() {
         return (
             <div style={{ marginTop: "2rem" }} className="row justify-content-center ">
-                <div className="col-md-9 ">
+                <div className="col-lg-9 ">
+                    <h2>Box Details</h2>
                     <br></br>
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">

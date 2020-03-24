@@ -38,19 +38,21 @@ export class Viewdetails extends Component {
 
         return (
             <div style={{ marginTop: "2rem" }} className="row justify-content-center ">
-                <Form onSubmit={this.onSubmit}>
-                    <Form.Group >
-                        <Form.Label>Select Status</Form.Label>
-                        <Form.Control as="select" onChange={this.onChange}>
-                            <option value="not_retrieved">Not Retrieved</option>
-                            <option value="retrieved">Retrieved</option>
-                        </Form.Control>
+                <div className="col-md-4 mr-auto ">
+                    <Form onSubmit={this.onSubmit}>
+                        <h3>Customer details</h3><br></br>
+                        <Form.Group >
+                            <Form.Label>Select Status</Form.Label>
+                            <Form.Control as="select" onChange={this.onChange}>
+                                <option value="not_retrieved">Not Retrieved</option>
+                                <option value="retrieved">Retrieved</option>
+                            </Form.Control>
 
-                    </Form.Group>
-                    <Button type="submit">Submit</Button>
-                </Form>
-
-                <div className="col-md-9 ">
+                        </Form.Group>
+                        <Button type="submit">Submit</Button>
+                    </Form>
+                </div>
+                <div className="col-md-12 ">
                     <br></br>
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
